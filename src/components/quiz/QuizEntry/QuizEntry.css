@@ -1,0 +1,86 @@
+
+#NumOfQuestionsText{
+  font-size:15px;
+  padding: 10px;
+}
+.form-select{
+  font-size:15px;
+  cursor: pointer;
+  /*max-width:75%;*/
+  /*width:140px;*/
+}
+.quizLogo {
+  display: block;
+  margin: 0 auto;
+  width: 25%;
+}
+
+/*.quizLogo:hover {*/
+  /*animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;*/
+  /*transform: translate3d(0, 0, 0);*/
+  /*backface-visibility: hidden;*/
+  /*perspective: 1000px;*/
+/*}*/
+
+
+/*Drop down design*/
+.dropdownContainer {
+  text-align: left;
+  padding-inline:50px;
+  /*font-family: 'Montserrat', sans-serif;*/
+  position: relative;
+  font-size:15px;
+}
+.dropdown {
+  display: inline;
+  padding: 5px;
+}
+/*.dropdown-content {*/
+  /*width:140px;*/
+/*}*/
+
+
+
+
+/* Entry screen frame */
+@media screen and (min-width: 640px) {
+  .quizLogo {
+    width: 25%;
+  }
+}
+/* 'Get Started' button*/
+.rainbow{
+  background:  conic-gradient(#606570, #4b515d, #343A40, #43444b,
+  #606570, #4b515d, #343A40, #43444b,
+  #606570, #4b515d, #343A40, #43444b,
+  #606570, #4b515d, #343A40, #43444b);
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px 16px;
+}
+.rainbow-1:hover{
+  background-image: linear-gradient(90deg, #00C0FF 0%, #FFCF00 49%, #FC4F4F 80%, #00C0FF 100%);
+  animation:slidebg 2s linear infinite;
+  border:2px solid #000000;
+}
+@keyframes slidebg {to{background-position:20vw;}}
+
+/*@keyframes shake {*/
+/*  10%, 90% {*/
+/*    transform: translate3d(-1px, 0, 0);*/
+/*  }*/
+
+/*  20%, 80% {*/
+/*    transform: translate3d(2px, 0, 0);*/
+/*  }*/
+
+/*  30%, 50%, 70% {*/
+/*    transform: translate3d(-4px, 0, 0);*/
+/*  }*/
+
+/*  40%, 60% {*/
+/*    transform: translate3d(4px, 0, 0);*/
+/*  }*/
+/*}*/
+

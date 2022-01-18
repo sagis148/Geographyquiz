@@ -1,0 +1,21 @@
+
+.quizContainer {
+  margin: 40px auto;
+  padding: 20px 0;
+  width: 90%;
+  box-shadow: 4px 4px 6px #333;
+  max-width: 550px;
+  /*height: 900px;*/
+  /*border: 50px;*/
+}
+
+
+@media screen and (min-width: 1024px) {
+  .quizContainer {
+    width: 60%;
+  }
+}
+h1{
+  font-family:  cursive;
+  color: #2ecc71;
+}

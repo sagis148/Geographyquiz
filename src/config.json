@@ -1,0 +1,18 @@
+{
+  "title": "Geography quiz",
+  "quizLogo": "planet-earth-spinning.gif",
+  "perfectGif":"perfect_gif.gif",
+  "backgroundImage": "background-planet.jpg",
+  "back": "texture.png",
+  "quizContainerColor": "#FFFFFF",
+  "containerAccentColor": "#000000",
+  "buttonColor": "#F20000",
+  "buttonHoverColor": "#FF8484",
+  "buttonTextColor": "#FFFFFF",
+  "questionScoreCorrectColor": "#2ecc71",
+  "questionScoreIncorrectColor": "#e74c3c",
+  "questionScoreWarningColor": "#ff9f43",
+  "answerButtonColor": "#D2D2D2",
+  "answerButtonTextColor": "#000000",
+  "answerButtonHoverColor": "#7FBCF9"
+}
