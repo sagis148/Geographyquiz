@@ -9,7 +9,8 @@ const cors = require('cors');
 bodyParser = require('body-parser')
 path = require('path');
 const mongoose = require("mongoose");
-mongoose.connect("mongodb+srv://Sagi:Metal148!@sagiscluster.cfrv5.mongodb.net/quizUsers?retryWrites=true&w=majority",function(error){
+
+mongoose.connect("YOUR MONGODB URI",function(error){
     if(error) console.log("mongoose connection error: ", error);
     console.log("mongoose connection successful");
 })
