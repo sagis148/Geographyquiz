@@ -1,62 +1,34 @@
 import React from 'react';
 import config from '../../../config.json';
-import flagQuestion  from '../../../flagQuestions.json';
-
+import question  from '../../../questions.json';
 import './QuizQuestion.css';
-
 
 class QuizQuestion extends React.Component {
   constructor(props) {
-    // console.log("constructor QuizQuestion")
     super(props);
     this.state = {
-
-      // currentPage: this.props.page,
       qNum:this.props.qNum,
-      buttonColor: config.buttonColor,
-      answerButtonColor:config.answerButtonColor,
-
       submitButtonClicked: false,
       questionAnswered: false,
       selectedAnswer: null,
-      // answerCorrect: null,
       showAnswerResponse: null,
-
       correctAnswer:null,
-
       randomAnswers:[],
       qType:this.props.gameQuestionsType,
       clueButtonPenalty:1,
       timePenalty:1
-
     }
-
   }
 
-
-
   componentDidMount() {
-    // console.log("QuizQuestion componentDidMount")
-
-    this.setState({
-      randomAnswers:this.createRandomAnswers(),
-      test:flagQuestion.questions[this.props.page - 1][this.state.qType]
-    })
-
+    this.setState({randomAnswers:this.createRandomAnswers()})
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    // console.log("componentDidUpdate QuizQuestion")
+    //Changing the timer.
     let questionTime = document.getElementById("timer")
     questionTime.style.color='black'
     questionTime.className=""
-    if (prevProps.page !== this.props.page) {
-      this.setState({
-        questionAnswered: false,
-        showAnswerResponse: null,
-        randomAnswers:this.createRandomAnswers(),
-      })
-    }
     if (this.props.secondsElapsed  <= 30) {
       questionTime.style.color = 'orange';
     }
@@ -65,98 +37,98 @@ class QuizQuestion extends React.Component {
       questionTime.className="blink_me";
       questionTime.style.fontSize = "large";
     }
+    //Next question
+    if (prevProps.page !== this.props.page) {
+      this.setState({
+        questionAnswered: false,
+        showAnswerResponse: null,
+        randomAnswers:this.createRandomAnswers()
+      })
+    }
 
     // if(this.props.secondsElapsed === 0) this.setState({ showAnswerResponse: "time is up"})
     //  console.log("this.setState.showAnswerResponse: ",this.setState.showAnswerResponse)
   }
 
-
+  /**
+   * Clicking this button will delete half of the answers and half of the score.
+   * @param e The get clue button.
+   */
   getClue(e) {
-    e.target.disabled = true;//Disabled clue button.
-    let buttonsToDisabled = [];//The buttons that will be disabled.
-    let i = 0//Index
+    //Disabled clue button.
+    e.target.disabled = true;
+    //The buttons that will be disabled.
+    let buttonsToDisabled = [];
+    let i = 0
+    //Current correct answer.
     let correctAnswer = this.state.correctAnswer;
-    // console.log( "correctAnswer: "+ correctAnswer)
-
-    let answersButtons = Array.from(document.querySelectorAll('.answerButton'));//All answers buttons.
-    let answersButtonsWithoutCorrectAnswer = answersButtons.filter(function(f) { return f.innerHTML !== correctAnswer })//All answers buttons without the correctAnswer.
-
+    //All answers buttons.
+    let answersButtons = Array.from(document.querySelectorAll('.answerButton'));
+    //All answers buttons without the correctAnswer.
+    let answersButtonsWithoutCorrectAnswer = answersButtons.filter(function(f) { return f.innerHTML !== correctAnswer });
+    //Set the clue penalty.
     this.setState({clueButtonPenalty:0.5})
-
     //Choose random answers that will become non-clickable.
-    while (i < answersButtons.length/2){//Half of the answers amount.
-      const random = Math.floor(Math.random() * Math.abs(answersButtons.length-1));//Random number in range (0,answersButtons.length-1).
-      if((buttonsToDisabled.indexOf(answersButtonsWithoutCorrectAnswer[random]) !== -1)) {//Avoid duplicate numbers.
+    //Half of the answers amount.
+    while (i < answersButtons.length/2){
+      //Random number in range (0,answersButtons.length-1).
+      const random = Math.floor(Math.random() * Math.abs(answersButtons.length-1));
+      //Avoid duplicate numbers.
+      if((buttonsToDisabled.indexOf(answersButtonsWithoutCorrectAnswer[random]) !== -1)) {
         continue;
       }
       buttonsToDisabled.push(answersButtonsWithoutCorrectAnswer[random]);
-      ++i;
+      i++;
     }
     //Make those random answers to non-clickable.
     i = 0
     while (i < buttonsToDisabled.length){
       buttonsToDisabled[i].disabled = true;
-      ++i;
+      i++;
     }
   }
 
+  /**
+   * This function is performed for each new question.
+   * Generates appropriate answers according the type of question.
+   * It's resets the clue button penalty and make it enable if necessary.
+   * Responsible for returning the colors of the buttons to gray.
+   * Turns on the timer.
+   * @returns {*[]} Random answers.
+   */
   createRandomAnswers() {
-
     //Set the clue penalty.
     this.setState({clueButtonPenalty:1})
-    //Start countdown the time.
-    this.props.startTime()
     //Return the clue button to enabled.
     document.getElementById("clueButton").disabled = false;
-
-    // let buttons = document.getElementsByClassName("answerButton");//Get all answer buttons.
     let correctAnswer;
-    // const answersArray = [];
-    const result = [];
-    // let i = 0;
-
-
+    const answersArray = [];
     //Return all buttons to original color and enabled them.
     for(let button of document.getElementsByClassName("answerButton")) {
       button.style.background = 'linear-gradient(to right, #eaeaea, #c5c4c4)';
       button.disabled = false;
     }
-
-    // while(i < flagQuestion.questions.length){//
-    //   const random = Math.floor(Math.random() * flagQuestion.questions.length);
-    //
-    //   answersArray.push(flagQuestion.questions[random][this.state.qType]);
-    //
-    //
-    //   i++
-    // }
-
-    // i=0
-    correctAnswer = flagQuestion.questions[this.props.page - 1][this.state.qType];
+    //Current correct answer.
+    correctAnswer = question.questions[this.props.page - 1][this.state.qType];
     this.setState({correctAnswer:correctAnswer})
-
-    result.push(correctAnswer);
+    //Creating answers array.
+    answersArray.push(correctAnswer);
     do {
-
-      let random = Math.floor(Math.random() * flagQuestion.questions.length);
-
-      if (!result.includes(flagQuestion.questions[random][this.state.qType])) {
-        result.push(flagQuestion.questions[random][this.state.qType]);
-        // console.log(i,": ",answersArray[random])
-      }
-      else if (result.includes(flagQuestion.questions[random] || result.includes(correctAnswer))) {
-        // console.log("shit: ",answersArray[random])
-
+      let random = Math.floor(Math.random() * question.questions.length);
+      if (!answersArray.includes(question.questions[random][this.state.qType])) {
+        answersArray.push(question.questions[random][this.state.qType]);
       }
     }
-    while (result.length < parseInt(this.props.difficulty)+1);
-    result.sort(() => Math.random() - 0.5)
-    return result;
-
+    while (answersArray.length < parseInt(this.props.difficulty)+1);
+    //Start countdown the time.
+    this.props.startTime()
+    //Shuffles the order of the answers.
+    answersArray.sort(() => Math.random() - 0.5)
+    return answersArray;
 
     // if(this.state.qType === "Population") {
-    //   answersArray.push(flagQuestion.populationAnswers[i])
-    //   correctAnswer = flagQuestion.questions[this.props.page - 1].population;
+    //   answersArray.push(question.populationAnswers[i])
+    //   correctAnswer = question.questions[this.props.page - 1].population;
     //   console.log("xxxxxxxxxxxxxxxxxxxx: "+ correctAnswer.slice(2))
     //   if(correctAnswer < 1000000){
     //     correctAnswer = "< 1000000"
@@ -193,7 +165,6 @@ class QuizQuestion extends React.Component {
     //   ++i;
     // }
 
-
     // if(this.state.qType !== "Population") {
     //   result.push(correctAnswer);
     //   result.sort(() => Math.random() - 0.5)
@@ -202,84 +173,80 @@ class QuizQuestion extends React.Component {
     //   result.sort((a, b) => parseInt(a.slice(2)) - parseInt(b.slice(2)))
     // }
 
-    // return result;
   }
 
+  /**
+   * Saves and colors the chosen answer button.
+   * @param e The chosen button.
+   */
   setAnswer = (e) => {
-    // console.log("setAnswer")
-
-    // let buttons = document.getElementsByClassName("answerButton");//Get all answer buttons.
-    //Return all buttons to original color.
-
-    //Color the selected answer button.
+    //No answer was selected.
     if(!this.state.questionAnswered){
       for(let button of document.getElementsByClassName("answerButton")) {
-        button.style.background = 'linear-gradient(to right, #eaeaea, #c5c4c4)';
+        button.style.background = 'linear-gradient(to right, #eaeaea, #c5c4c4)';//Gray.
       }
-      e.target.style.background =  'linear-gradient(to right, #7FBCF9, #77a7d7)';
-
+      //Color the selected answer button.
+      e.target.style.background =  'linear-gradient(to right, #7FBCF9, #77a7d7)';//Azure.
     }
+    //answer selected.
     if(this.state.questionAnswered) {
-      e.target.style.border="3px solid #000"
+      e.target.style.border="3px solid #000"//Highlight with black border.
     }
-
-    this.setState({//Sets the selected answer.
+    //Sets the selected answer and its index(name).
+    this.setState({
       selectedAnswer: e.target.innerHTML,
       selectedAnswerIndex:e.target.name
     });
   }
-
-  colorSelectedAnswer = (answerCorrect) => {
-    // let correctAnswer=this.state.correctAnswer
-    // let buttons = document.getElementsByClassName("answerButton");//Get all answer buttons.
+  /**
+   * This functions colors the correct answer in green and if the user chose incorrct answer it will color it in red.
+   * @param answerCorrect True for correct answer, False for incorrect answer.
+   * button.name is the button number/index.
+   */
+  colorTheAnswer = (answerCorrect) => {
 
     for(let button of document.getElementsByClassName("answerButton")) {
-      if(button.innerHTML === this.state.correctAnswer ){//Paint the correct answer button.
-        button.style.background= 'linear-gradient(to right, #5ed285, #1b9b52)';
+      //Checks if the chosen button match to the correct answer.
+      if(button.innerHTML === this.state.correctAnswer ){
+        //Paint the correct answer button.
+        button.style.background= 'linear-gradient(to right, #5ed285, #1b9b52)';//Green.
       }
-      if(this.state.selectedAnswerIndex === button.name && !answerCorrect){//Paint the incorrect answer button.
-        button.style.background= 'linear-gradient(to right, #ed213a, #93291e)';
+      //If the user chose incorrct answer.
+      if(this.state.selectedAnswerIndex === button.name && !answerCorrect){
+        //Paint the incorrect answer button.
+        button.style.background= 'linear-gradient(to right, #ed213a, #93291e)';//Red.
       }
-      // if(answerCorrect ==='null'){
-      //   //Return all buttons to original color.
-      //   for(button of buttons) {
-      //     button.style.backgroundColor = "#eaeaea";
-      //   }
-      // }
-      //  if(this.state.selectedAnswerIndex === button.name && answerCorrect) {
-      //   button.style.backgroundColor = "#2ecc71";
-      // }
     }
   }
-  handleAnswerSubmission = (e) => {
-
-    // console.log("handleAnswerSubmission")
-    e.preventDefault();
-
-    let currentQuestion = flagQuestion.questions[this.props.page - 1][this.state.qType]
-    let currentTime = (document.getElementById("timer").innerHTML)
-
+  /**
+   * This function is performed when an answer submited.
+   * Checks the answer and paints the buttons accordingly, stops the timer and calculates the score.
+   */
+  handleAnswerSubmission = () => {
+    let currentQuestion = question.questions[this.props.page - 1][this.state.qType]
+    let currentTime = document.getElementById("timer").innerHTML
     let answerCorrect;
+    //If an answer was selected and that was the correct answer.
     if (this.state.selectedAnswer && (this.state.selectedAnswer) === (currentQuestion))
     {
       answerCorrect = true;
-      this.colorSelectedAnswer(answerCorrect)
+      this.colorTheAnswer(answerCorrect)
     }
-
+    //If an answer was selected and that was NOT the correct answer.
     else if (this.state.selectedAnswer)
     {
       answerCorrect = false;
-      this.colorSelectedAnswer(answerCorrect)
+      this.colorTheAnswer(answerCorrect)
     }
+    //If an answer was NOT.
     else answerCorrect = null;
+    //After clicking submit the timer will stop.
     if(answerCorrect != null){
       this.props.pauseTime()
     }
-
     if (answerCorrect === null) this.setState({ showAnswerResponse: "none" })
     else if (answerCorrect === true) this.setState({ showAnswerResponse: "correct" })
     else this.setState({ showAnswerResponse: "incorrect"})
-
 
     this.setState({
       submitButtonClicked: true,
@@ -289,39 +256,42 @@ class QuizQuestion extends React.Component {
 
     if (this.state.selectedAnswer && answerCorrect !== null) {
       this.setState({
-        // currentPage: this.props.page,
         submitButtonClicked: false,
         selectedAnswer: null,
-        // answerCorrect: null
       });
+      //Calculate the score.
       this.props.handleAnswerSubmission(answerCorrect,this.state.clueButtonPenalty,(currentTime/2));
     }
 
   }
-
+  /**
+   * Creates the answers buttons.
+   * @param randomAnswers The answers.
+   * @returns {*} Answers buttons.
+   */
   renderAnswers = (randomAnswers) => {
-    // console.log("renderAnswers")
-
     return randomAnswers.map((answer,i) => {
-
       return (
-
-          <div className="col box" key={answer} >
+          <div className="col" key={answer}>
             <button
                 type="button"
                 className= "answerButton"
                 name={`${i}`}
-                onClick={e => this.setAnswer(e)}//(e,"value")
+                onClick={e => this.setAnswer(e)}
                 id={`answerButton${i}` }//Unique id for each button.
+                style={{fontWeight:"bold"}}
             >
               {answer}
             </button>
-
           </div>
       )
     })
   }
-
+  /**
+   * Displays a response of the solution.
+   * @param currentQuestion The current correct answer.
+   * @returns {JSX.Element} Response of the solution.
+   */
   renderAnswerResponseText = (currentQuestion) => {
 
     if (this.state.showAnswerResponse === "correct")
@@ -336,8 +306,14 @@ class QuizQuestion extends React.Component {
 
     // </div>)
   }
+
+  /**
+   * Creates the question.
+   * If question type is flags it will display an image of a flag Otherwise, it will display the country name.
+   * @returns {JSX.Element} Flag image or country name.
+   */
   renderQuestionTypeField() {
-    let currentQuestion = flagQuestion.questions[this.props.page - 1];
+    let currentQuestion = question.questions[this.props.page - 1];
     if(this.state.qType === "country") {
       return(
           <img
@@ -358,7 +334,6 @@ class QuizQuestion extends React.Component {
   }
 
   render() {
-    // console.log("render QuizQuestion")
     return (
         <div className="container">
           <h1>{config.title}</h1>
@@ -370,14 +345,11 @@ class QuizQuestion extends React.Component {
               <div className="col px-0">
                 <div className="timeAndAmount">
                   Time:
-                  {/*<p>{"60"}</p>*/}
-
                   <p className="" id={"timer"}> {this.props.getSeconds()}</p>
-                  {/*<Timer/>*/}
                 </div>
               </div>
               <div className="col px-0">
-                <div>
+                {/*<div>*/}
                   <button
                       title="Clicking this button will delete half of the answers and half of the score."
                       className="getClueButton"
@@ -386,10 +358,8 @@ class QuizQuestion extends React.Component {
                   >
                     {"Hint"}
                   </button>
-                </div>
-
+                {/*</div>*/}
               </div>
-
               <div className="col px-0">
                 <div className="timeAndAmount">
                   Question
@@ -399,17 +369,12 @@ class QuizQuestion extends React.Component {
             </div>
           </div>
           <div className="questionFormWrap">
-
-            {/*<form className="questionForm" onSubmit={(e) => e.preventDefault()}>*/}
-            {/*  <fieldset className="questionFieldset" >*/}
             <div className="container" >
               <div className="row row-cols-sm-2 mx-5">
                 {this.renderAnswers(this.state.randomAnswers)}
               </div>
             </div>
-
             {!this.state.questionAnswered ?
-
                 <button
                     className="questionSubmit"
                     onClick={this.handleAnswerSubmission}
@@ -424,24 +389,20 @@ class QuizQuestion extends React.Component {
                   {"Next Question"}
                 </button>
             }
-
             <div className="row" style={{height: 77}}>
-              {this.renderAnswerResponseText(flagQuestion.questions[this.props.page - 1][this.state.qType])}
+              {this.renderAnswerResponseText(question.questions[this.props.page - 1][this.state.qType])}
             </div>
-
             <p className="questionCurrentScore">
-              <span style={{ color: config.questionScoreCorrectColor }}>{this.props.numCorrectAnswers} correct</span> |&nbsp;
-              <span style={{ color: config.questionScoreIncorrectColor }}>{this.props.numIncorrectAnswers} incorrect</span>
+              <span style={{ color: config.questionScoreCorrectColor }}>
+                {this.props.numCorrectAnswers} correct</span> |&nbsp;
+              <span style={{ color: config.questionScoreIncorrectColor }}>
+                {this.props.numIncorrectAnswers} incorrect</span>
               <br />
               <span>Your Score: {this.props.score}</span>
             </p>
-            {/*</fieldset>*/}
-
-            {/*</form>*/}
           </div>
         </div>
     )
   }
 }
-
 export default QuizQuestion;
