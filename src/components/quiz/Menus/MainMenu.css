@@ -1,5 +1,3 @@
-
-
 .swal-text {
     background-color: #FEFAE3;
     padding: 17px;
@@ -9,54 +7,3 @@
     text-align: center;
     color: #61534e;
 }
-
-.table  {
-    counter-reset: serial-number;  /* Set the serial number counter to 0 */
-}
-
-.table td:first-child:before {
-    font-weight: bold;
-    counter-increment: serial-number;  /* Increment the serial number counter */
-    content: counter(serial-number);  /* Display the counter */
-}
-.table thead{
-font-weight: bold;
-
-}
-
-
-.table tbody tr:nth-child(1) {
-    background:conic-gradient(#edc800, #e3b600, #f3cf00, #ffe800,
-    #edc800, #e3b600, #f3cf00, #ffe800,
-    #edc800, #e3b600, #f3cf00, #ffe800,
-    #edc800, #e3b600, #f3cf00, #ffe800);
-
-}
-
-.table tr:nth-child(2) {
-    background:conic-gradient(#d7d7d7, #c3c3c3, #cccccc, #c6c6c6,
-    #d7d7d7, #c3c3c3, #cccccc, #c6c6c6,
-    #d7d7d7, #c3c3c3, #cccccc, #c6c6c6,
-    #d7d7d7, #c3c3c3, #cccccc, #c6c6c6);
-}
-
-.table tr:nth-child(3) {
-    background:conic-gradient(#d95641, #b14439, #b2453a, #d25645,
-    #d95641, #b14439, #b2453a, #d25645,
-    #d95641, #b14439, #b2453a, #d25645,
-    #d95641, #b14439, #b2453a, #d25645);
-}
-
-/*@keyframes waviy {*/
-/*    0%,40%,100%*/
-/*         {*/
-/*             transform: translateX(5px)*/
-/*         }*/
-/*    20%*/
-/*    {*/
-/*        transform: translateX(-5px)*/
-/*    }*/
-/*}*/
-/*h2{*/
-/*    animation: waviy 2s infinite;*/
-/*}*/
