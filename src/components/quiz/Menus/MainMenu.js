@@ -6,30 +6,29 @@ import HighScoreTable from '../HighScoreTable/HighScoreTable'
 
 const axios = require('axios');
 
-
-
+/**
+ * The first page.
+ */
 class MainMenu extends React.Component {
     constructor(props) {
-        console.log("MainMenu c-tor")
         super(props);
         this.state = {
             username: '',
             usersCollection: []
         };
     }
-
-
-
-
-
-
-
-
+    /**
+     * Creates the High score table from the mongodb data base.
+     * @returns High score table.
+     */
     dataTable() {
         return this.state.usersCollection.map((data, i) => {
-            return <HighScoreTable obj={data} key={i}  />;
+            return <HighScoreTable obj={data} key={i}/>;
         });
     }
+    /**
+     * Show the leaderboard from the data base.
+     */
     componentDidMount() {
         axios.get('http://localhost:2000/showAll')
             .then(res => {
@@ -39,21 +38,20 @@ class MainMenu extends React.Component {
                 console.log(error);
             })
     }
-
-    register = (e) => {
-        e.preventDefault()
-
+    /**
+     * Register a user to data base.
+     */
+    register = () => {
         axios.post('http://localhost:2000/register', {
             username: this.props.playerName,
         })
             .then((res) => {
-                // swal({
-                //         text: res.data.title,
-                //         icon: "success",
-                //         timer: 500,
-                //     },
-                // );
-                // this.props.history.push('/');
+                swal({
+                        text: res.data.title,
+                        icon: "success",
+                        timer: 1000,
+                    },
+                );
                 this.props.handleNameSubmission()
             })
             .catch((err) => {
@@ -65,38 +63,28 @@ class MainMenu extends React.Component {
                     })
                 }
             });
-
     }
 
     render() {
-        console.log("render MainMenu")
         return (
             <div>
-
                 <h1>{config.title}</h1>
-                <img className="quizLogo" src={`${window.location.origin}/${config.quizLogo}`} alt={`${config.title} logo`} />
-                <h2 style={{ color: config.titleColor, margin:5}}>Welcome</h2>
-
+                <img className="quizLogo" src={`${window.location.origin}/${config.quizLogo}`} alt={`${config.title} logo` } />
+                <h2>Welcome</h2>
                 <div className="row">
-                    <div className="col-5">
-                        Please enter your name:
+                    <div className="col sm-6">
+                        <label htmlFor="userNameInput">Please enter your name:</label>
                     </div>
-                    <div className="username input col-7">
-                        {/*<Form>*/}
-                            <div className = "mb-4">
-                                <input
-                                    // size="5"
-                                    type="text"
-                                    name="username"
-                                    // value={this.props.playerName}
-
-                                    onChange={this.props.setPlayerName}
-                                    placeholder="s"
-                                />
-                                {/*<FormControl.Feedback type="invalid">*/}
-                                {/*</FormControl.Feedback>*/}
-                            </div>
-                        {/*</Form>*/}
+                    <div className="col sm-6">
+                        <input
+                            type="text"
+                            id="userNameInput"
+                            onChange={this.props.setPlayerName}
+                            placeholder="s"
+                            onKeyPress={(e) => {
+                                if (e.key === "Enter") this.register()
+                            }}
+                        />
                     </div>
                 </div>
 
@@ -105,31 +93,29 @@ class MainMenu extends React.Component {
                     className="rainbow rainbow-1"
                     disabled={this.props.playerName === ''}
                     onClick={this.register}
-                    // onClick={this.props.handleNameSubmission }
                 >
                     Continue
                 </button>
 
-                <div className="wrapper-users">
-                    <div className="container">
-                        <table className="table table-bordered">
-                            <thead className="thead-dark">
-                            <tr>
-                                <th> </th>
-                                <td>Name</td>
-                                {/*<td>logged</td>*/}
-                                <td>Best Score</td>
-                                <td>Last seen</td>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {this.dataTable()}
-                            </tbody>
-                        </table>
-                    </div>
+                <div className="container">
+                    <table className="table table-bordered border-dark">
+                        <thead className="thead-dark">
+                        <tr>
+                            <th> </th>
+                            <td>Name</td>
+                            {/*<td>logged</td>*/}
+                            <td>Best Score</td>
+                            <td>Last Seen</td>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {this.dataTable()}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         );
     }
 }
+
 export default MainMenu;
