@@ -9,6 +9,6 @@ MongoDB, React, Nodejs, JavaScript, CSS
 
 ## clone or download
 ```terminal
-$ git clone https://github.com/amazingandyyy/mern.git
+$ https://github.com/sagis148/mygeographyquiz.git
 $ npm i
 ```
