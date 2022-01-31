@@ -1,26 +1,13 @@
 .resultsLogo {
   width: 25%;
 }
-/*.resultsLogo:hover {*/
-/*  animation: shake 0.82s cubic-bezier(.36, .07, .19, .97) both;*/
-/*  transform: translate3d(0, 0, 0);*/
-/*  backface-visibility: hidden;*/
-/*  perspective: 1000px;*/
-/*}*/
-
 .resultsHeader {
   text-decoration: underline;
 }
-
-
-
 .resultsNumbers {
-  /*font-family: 'Montserrat', sans-serif;*/
-  font-weight: 300;
+  font-weight: bold;
 }
-
-.startOver {
-  /*font-family: 'Montserrat', sans-serif;*/
+.endGameButtons {
   font-weight: 500;
   transition: .2s;
   cursor: pointer;
@@ -31,15 +18,9 @@
   font-size: 16px;
   color: white;
   background: linear-gradient(to right, #ed213a, #93291e);
-  /*background:  conic-gradient(*/
-  /*        #ef6565, #e53838, #F20000, #e10707,*/
-  /*#ef6565, #e53838, #F20000, #e10707,*/
-  /*#ef6565, #e53838, #F20000, #e10707,*/
-  /*#ef6565, #e53838, #F20000, #e10707*/
-  /*);*/
 }
 
-.startOver:hover {
+.endGameButtons:hover {
   background: linear-gradient(to right, #ec7280, #c44747);
   border: 2px solid #000000;
 }
