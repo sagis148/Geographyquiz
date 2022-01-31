@@ -49,7 +49,7 @@ class MainMenu extends React.Component {
                 swal({
                         text: res.data.title,
                         icon: "success",
-                        timer: 1000,
+                        timer: 3000,
                     },
                 );
                 this.props.handleNameSubmission()
