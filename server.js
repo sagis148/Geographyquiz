@@ -21,7 +21,6 @@ app.use(cors({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 
-
 app.get("/", (req, res) => {
     res.status(200).json({
         status: true,
@@ -40,8 +39,6 @@ app.get("/register", (req, res) => {
 /* register api */
 app.post("/register", (req, res) => {
     console.log("register post")
-
-
     try {
         //Removes white spaces from the beginning and the end.
         let currentUserName=req.body.username.replace(/^\s+|\s+$/gm,'');
@@ -87,14 +84,14 @@ app.post("/register", (req, res) => {
 // Return the updated document instead of the original document
                     const options = { returnNewDocument: true };
                     return user.findOneAndUpdate(query, update, options)
-                        // .then(updatedDocument => {
-                        //     if(updatedDocument) {
-                        //         console.log(`Successfully updated loggedIn to true & date to current date: ${updatedDocument}.`)
-                        //     } else {
-                        //         console.log("No document matches the provided query - loggedIn to true & date to current date.")
-                        //     }
-                        //     return updatedDocument
-                        // })
+                        .then(updatedDocument => {
+                            if(updatedDocument) {
+                                console.log(`Successfully updated loggedIn to true & date to current date: ${updatedDocument}.`)
+                            } else {
+                                console.log("No document matches the provided query - loggedIn to true & date to current date.")
+                            }
+                            return updatedDocument
+                        })
                         .catch(err => console.error(`Failed to find and update document: ${err}`))
                 }
 
@@ -128,21 +125,21 @@ app.get('/saveScore/:score/:playerName', function(req, res) {
     user.find({ "username": playerName }, (err, data) => {
         if(req.params.score > data[0].score){
              user.findOneAndUpdate(query, update, options).sort({"score": -1})
-                // .then(updatedDocument => {
-                //     user.find((error, data) => {
-                //         if (error) {
-                //             return next(error)
-                //         } else {
-                //             res.json(data)
-                //         }
-                //     })
-                //     if (updatedDocument) {
-                //         console.log(`Successfully updated score: ${updatedDocument}.`)
-                //     } else {
-                //         console.log("No document matches the provided query - score.")
-                //     }
-                //     return updatedDocument
-                // })
+                .then(updatedDocument => {
+                    user.find((error, data) => {
+                        if (error) {
+                            return next(error)
+                        } else {
+                            res.json(data)
+                        }
+                    })
+                    if (updatedDocument) {
+                        console.log(`Successfully updated score: ${updatedDocument}.`)
+                    } else {
+                        console.log("No document matches the provided query - score.")
+                    }
+                    return updatedDocument
+                })
                 .catch(err => console.error(`Failed to find and update document: ${err}`))
         }
     });
@@ -160,9 +157,6 @@ app.get('/showAll', function(req, res,next) {
     }).sort({"score": -1})
 })
 
-// app.post("/test", (req, res) => {
-//     console.log("test")
-// });
 app.post("/logOut", (req, res) => {
     console.log("logOut post")
 
@@ -177,11 +171,11 @@ app.post("/logOut", (req, res) => {
     const options = { returnNewDocument: true };
     return user.findOneAndUpdate(query, update, options)
         .then(updatedDocument => {
-            // if(updatedDocument) {
-            //     console.log(`Successfully updated loggedIn to false: ${updatedDocument}.`)
-            // } else {
-            //     console.log("No document matches the provided query - loggedIn to false.")
-            // }
+            if(updatedDocument) {
+                console.log(`Successfully updated loggedIn to false: ${updatedDocument}.`)
+            } else {
+                console.log("No document matches the provided query - loggedIn to false.")
+            }
             return updatedDocument
         })
         .catch(err => console.error(`Failed to find and update document: ${err}`))
@@ -200,11 +194,11 @@ app.post("/logOutEveryOne", (req, res) => {
 
     return user.updateMany(query, update,options)
         .then(updatedDocument => {
-            // if(updatedDocument) {
-            //     console.log(`Successfully updated all users loggedIn to false: ${updatedDocument}.`)
-            // } else {
-            //     console.log("No document matches the provided query - all users loggedIn to false.")
-            // }
+            if(updatedDocument) {
+                console.log(`Successfully updated all users loggedIn to false.`)
+            } else {
+                console.log("No document matches the provided query - all users loggedIn to false.")
+            }
             return updatedDocument
         })
         .catch(err => console.error(`Failed to find and update document: ${err}`))
