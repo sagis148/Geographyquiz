@@ -15,7 +15,7 @@ class App extends React.Component {
       numIncorrectAnswers: 0,
       qNum: 0,//Current question number.
       score: 0,//Current player score.
-      playerName:"s",
+      playerName:"",
       difficulty:"3",//Default - easy.
       amountOfQuestions:"5",//Default - 5 questions.
       gameQuestionsType:"country",//Default - flags questions.
