@@ -1,47 +1,31 @@
-
-
 .timeHintQuestion{
-  margin: 0 0 4px 73px;
+  margin-left: 73px;
   width: 72%;
   padding: 0 0 0 10px;
-
 }
 .timeAndAmount{
-  /*font-weight: 500;*/
   margin: 5px;
-  /*text-align: center;*/
   border:2px solid;
+  border-radius: 8px;
 }
-/*.questionCurrentScore {*/
-  /*display: inline-block;*/
-  /*text-align: center;*/
-  /*width: 100%;*/
-  /*margin: 0;*/
-  /*font-weight: bold;*/
-/*}*/
-/*.questionHorizontalDivider {*/
-/*  width: 80px;*/
-/*  height: 4px;*/
-/*  margin: 20px auto;*/
-/*  background-color: #eaeaea;*/
-/*  border-radius: 2px;*/
-/*}*/
+.questionCurrentScore {
+  margin: 0;
+}
 .questionImage {
   display: block;
-  margin: 0 0 4px 78px;
+  margin-left:78px;
   width: 72%;
   height: 280px;
   border: 2px solid;
+  border-radius: 5px;
 }
 .capitalCityDiv{
-  margin: 0 0 4px 78px;
+  margin-left:78px;
   width: 72%;
   height: 280px;
-  /*border: 3px solid #73AD21;*/
-  border-width: 10px;
-  border-style: outset;
-  border-color: #0080FF;
-  border-radius: 10px;
+  border:8px inset;
+  border-color: #257cff;
+  border-radius: 15px;
   background-color: #eeeeff;
   font-family:"Times New Roman", Times, serif;
   font-size: 50px;
@@ -51,11 +35,6 @@
   text-align: center;
   font-weight: bold;
 }
-
-/*.questionForm {*/
-  /*font-family: 'Montserrat', sans-serif;*/
-/*}*/
-
 .getClueButton{
   cursor: pointer;
   margin: 10px ;
@@ -72,16 +51,12 @@
 .getClueButton:disabled{
   background: linear-gradient(to bottom, #9ffafa 10%, #5794f8 90%);
   cursor:no-drop;
-
 }
-
-
 .questionSubmit {
-  /*font-family: 'Montserrat', sans-serif;*/
   font-weight: 500;
   transition: .2s;
   cursor: pointer;
-  margin: 10px auto;
+  margin: 5px;
   padding: 10px 30px;
   border-radius: 8px;
   font-size: 16px;
@@ -92,15 +67,11 @@
   #606570, #4b515d, #343A40, #43444b);
 }
 .questionSubmit:hover {
-  /*background-color: #80aaff;*/
   border: 2px solid silver;
 }
 .answerButton{
   background: linear-gradient(to right, #eaeaea, #c5c4c4);
-  /*background:#eaeaea;*/
-          /*linear-gradient(to bottom, #00ffff 10%, #0066ff 90%);*/
   border: 2px solid black;
-
   border-radius: 8px;
   width: 180px;
   height:75px;
@@ -111,29 +82,17 @@
 .answerButton:hover:enabled {
   border: 3px solid black;
   background: linear-gradient(to right, #7FBCF9, #77a7d7);
-  /*background: #7FBCF9;*/
-
 }
 
 .answerButton:disabled {
   cursor:default;
 }
 .answerResponse {
-  /*text-align: center;*/
   font-weight: 500;
   font-size:22px;
-  /*margin: 10px auto;*/
+  margin: 5px;
 }
 
-/*.box{*/
-/*  border-collapse: collapse;*/
-/*}*/
-.blink_me {
-  animation: blinker 1s linear infinite;
-}
+.blink_me {animation: blinker 1s linear infinite;}
 
-@keyframes blinker {
-  50% {
-    opacity: 0;
-  }
-}
+@keyframes blinker { 50% {opacity: 0;} }
