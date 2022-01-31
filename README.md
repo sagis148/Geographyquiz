@@ -12,6 +12,6 @@ MongoDB, React, Nodejs, JavaScript, CSS
 $ https://github.com/sagis148/mygeographyquiz.git
 ```
 
-## Follow the instructions below to run the app:
+> Follow the instructions below to run the app:
 * notice, you need client and server runs concurrently in different terminal session, in order to make them talk to each other
 
