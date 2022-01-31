@@ -72,16 +72,9 @@ app.post("/register", (req, res) => {
                         }
                     })
                 } else {
-
-
-                    // console.log("data2: "+ data )
-                    // res.status(400).json({
-                    //     errorMessage: `UserName ${userName} Already Exist!`,
-                    //     status: false
-                    // });
-                    res.status(200).json({
-                        status: true,
-                        title: `Welcome back ${currentUserName}`,
+                    res.status(400).json({
+                        errorMessage: `The user name: ${currentUserName} already exist!`,
+                        status: false
                     });
                     const query = { "username": currentUserName };
 
