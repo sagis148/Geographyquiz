@@ -54,7 +54,6 @@ class QuizEntry extends React.Component {
                                 <option value="city">Capital Cities</option>
                                 <option value="religion">Religion</option>
                                 <option value="language">Language</option>
-                                {/*<option value="Population">Population</option>*/}
                             </select>
                         </div>
                     </div>
