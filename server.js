@@ -209,34 +209,3 @@ app.post("/logOutEveryOne", (req, res) => {
         })
         .catch(err => console.error(`Failed to find and update document: ${err}`))
 });
-
-/* login api */
-// app.post("/login", (req, res) => {
-//     console.log("login post")
-//     try {
-//         let userName=req.body.username.replace(/^\s+|\s+$/gm,'');
-//         if (req.body && userName) {
-//             user.find({ username: userName }, (err, data) => {
-//                 if (data.length > 0) {
-//
-//                 } else {
-//                     res.status(400).json({
-//                         errorMessage: 'Username is incorrect!',
-//                         status: false
-//                     });
-//                 }
-//             })
-//         } else {
-//             res.status(400).json({
-//                 errorMessage: 'Add proper parameter first!',
-//                 status: false
-//             });
-//         }
-//     } catch (e) {
-//         res.status(400).json({
-//             errorMessage: 'Something went wrong!',
-//             status: false
-//         });
-//     }
-//
-// });
