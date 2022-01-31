@@ -1,5 +1,4 @@
 import React from 'react';
-
 import QuizEntry from './QuizEntry/QuizEntry';
 import QuizQuestion from './QuizQuestion/QuizQuestion';
 import QuizFinish from './QuizFinish/QuizFinish';
@@ -7,19 +6,13 @@ import './Quiz.css';
 import MainMenu from "./Menus/MainMenu";
 import axios from "axios";
 
-
-
 class Quiz extends React.Component {
-
     constructor(props) {
-        console.log("constructor app")
-
         super(props);
         axios.post('http://localhost:2000/logOutEveryOne', {})
     }
 
   renderQuizDisplay = () => {
-    // console.log("render QuizDisplay")
     if (this.props.page === -1) {//Main Menu
       return (
           <MainMenu
@@ -29,15 +22,13 @@ class Quiz extends React.Component {
           />
       )
     }
-
     else if (this.props.page === 0) {//Quiz entry
-
       return <QuizEntry
           handlePageNext={this.props.handlePageNext}
           gameQuestionsType={this.props.gameQuestionsType}
-          handleTypeChange={this.props.handleTypeChange}
-          handleQuestionsAmountChange={this.props.handleQuestionsAmountChange}
-          handleDifficultyChange={this.props.handleDifficultyChange}
+          setTypeChange={this.props.setTypeChange}
+          setQuestionsAmountChange={this.props.setQuestionsAmountChange}
+          setDifficultyChange={this.props.setDifficultyChange}
           playerName={this.props.playerName}
           difficulty={this.props.difficulty}
           amountOfQuestions={this.props.amountOfQuestions}
@@ -59,10 +50,7 @@ class Quiz extends React.Component {
               gameQuestionsType={this.props.gameQuestionsType}
               amountOfQuestions={this.props.amountOfQuestions}
               difficulty={this.props.difficulty}
-
-              // isActive={this.props.isActive}
               secondsElapsed={this.props.secondsElapsed}
-
               startTime={this.props.startTime}
               resetTime={this.props.resetTime}
               pauseTime={this.props.pauseTime}
@@ -83,7 +71,6 @@ class Quiz extends React.Component {
     }
   }
   render() {
-    // console.log("render quiz")
     return (
         <div className="container-fluid quizContainer" style={{ backgroundImage: `url('texture.png')`}}>
           {this.renderQuizDisplay()}
