@@ -1,21 +1,70 @@
-
+.quizLogo {
+  display: block;
+  margin: 0 auto;
+  width: 25%;
+}
 .quizContainer {
-  margin: 40px auto;
-  padding: 20px 0;
-  width: 90%;
+  margin: 10px;
+  padding: 5px;
   box-shadow: 4px 4px 6px #333;
   max-width: 550px;
-  /*height: 900px;*/
-  /*border: 50px;*/
+  border-radius: 20px;
+}
+.table  {
+  counter-reset: serial-number;  /* Set the serial number counter to 0 */
+  border: 2px solid black;
 }
 
-
-@media screen and (min-width: 1024px) {
-  .quizContainer {
-    width: 60%;
-  }
+.table td:first-child:before {
+  font-weight: bold;
+  counter-increment: serial-number;  /* Increment the serial number counter */
+  content: counter(serial-number);  /* Display the counter */
 }
+.table thead{
+  border: 2px solid black;
+}
+
+/*Gold*/
+.table tbody tr:nth-child(1) {
+  font-weight: bold;
+  background:conic-gradient(#edc800, #e3b600, #f3cf00, #ffe800,
+  #edc800, #e3b600, #f3cf00, #ffe800,
+  #edc800, #e3b600, #f3cf00, #ffe800,
+  #edc800, #e3b600, #f3cf00, #ffe800);
+}
+/*Silver*/
+.table tr:nth-child(2) {
+  background:conic-gradient(#d7d7d7, #c3c3c3, #cccccc, #c6c6c6,
+  #d7d7d7, #c3c3c3, #cccccc, #c6c6c6,
+  #d7d7d7, #c3c3c3, #cccccc, #c6c6c6,
+  #d7d7d7, #c3c3c3, #cccccc, #c6c6c6);
+}
+/*Bronze*/
+.table tr:nth-child(3) {
+  background:conic-gradient(#d95641, #b14439, #b2453a, #d25645,
+  #d95641, #b14439, #b2453a, #d25645,
+  #d95641, #b14439, #b2453a, #d25645,
+  #d95641, #b14439, #b2453a, #d25645);
+}
+.rainbow{
+  background:  conic-gradient(#606570, #4b515d, #343A40, #43444b,
+  #606570, #4b515d, #343A40, #43444b,
+  #606570, #4b515d, #343A40, #43444b,
+  #606570, #4b515d, #343A40, #43444b);
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  padding: 8px 16px;
+  margin:10px;
+}
+.rainbow-1:hover{
+  background-image: linear-gradient(90deg, #00C0FF 0%, #FFCF00 49%, #FC4F4F 80%, #00C0FF 100%);
+  animation:slidebg 8s linear infinite;
+  border:2px solid #000000;
+}
+@keyframes slidebg {to{background-position:100vw;}}
+
 h1{
-  font-family:  cursive;
+  font-family: cursive;
   color: #2ecc71;
 }
