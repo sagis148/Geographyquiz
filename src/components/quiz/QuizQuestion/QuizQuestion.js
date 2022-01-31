@@ -125,54 +125,6 @@ class QuizQuestion extends React.Component {
     //Shuffles the order of the answers.
     answersArray.sort(() => Math.random() - 0.5)
     return answersArray;
-
-    // if(this.state.qType === "Population") {
-    //   answersArray.push(question.populationAnswers[i])
-    //   correctAnswer = question.questions[this.props.page - 1].population;
-    //   console.log("xxxxxxxxxxxxxxxxxxxx: "+ correctAnswer.slice(2))
-    //   if(correctAnswer < 1000000){
-    //     correctAnswer = "< 1000000"
-    //   }
-    //   else if(correctAnswer < 2500000){
-    //     correctAnswer ="< 2500000"
-    //   }
-    //   else if(correctAnswer < 5000000){
-    //     correctAnswer ="< 5000000"
-    //   }
-    //   else if(correctAnswer < 10000000){
-    //     correctAnswer ="< 10000000"
-    //   }
-    //   else if(correctAnswer < 25000000){
-    //     correctAnswer ="< 25000000"
-    //   }
-    //   else if(correctAnswer < 50000000){
-    //     correctAnswer ="< 50000000"
-    //   }
-    //   else if(correctAnswer < 100000000){
-    //     correctAnswer ="< 100000000"
-    //   }
-    //   else if(correctAnswer > 100000000){
-    //     correctAnswer ="100000000 +"
-    //   }
-    //   console.log("yyyyyyyyyyyyyyyyyyy: ", correctAnswer)
-    // }
-    //   const random = Math.floor(Math.random() * answersArray.length);
-    //   if((result.indexOf(answersArray[random]) !== -1)
-    //       ||(answersArray[random]) === correctAnswer) {//Avoid duplicate answer.
-    //     continue;
-    //   }
-    //   result.push(answersArray[random]);
-    //   ++i;
-    // }
-
-    // if(this.state.qType !== "Population") {
-    //   result.push(correctAnswer);
-    //   result.sort(() => Math.random() - 0.5)
-    // }
-    // else if(this.state.qType === "Population") {
-    //   result.sort((a, b) => parseInt(a.slice(2)) - parseInt(b.slice(2)))
-    // }
-
   }
 
   /**
