@@ -80,7 +80,6 @@ class MainMenu extends React.Component {
                             type="text"
                             id="userNameInput"
                             onChange={this.props.setPlayerName}
-                            placeholder="s"
                             onKeyPress={(e) => {
                                 if (e.key === "Enter") this.register()
                             }}
