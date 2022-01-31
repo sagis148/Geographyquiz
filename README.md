@@ -1,4 +1,5 @@
-<h1 align="center">
+
 # Geography quiz
-</h1>
+## Geography quiz
+###### Geography quiz
 
