@@ -22,7 +22,7 @@ $ https://github.com/sagis148/mygeographyquiz.git
 ```
 1. Open server.js file and change the MONGODB URI to your mongodb uri.
 2. Open terminal and go to - cd mygeographyquiz-master.
-3. run **npm i**.
+3. run __npm i__.
 4. run **node server.js**.
 5. run **npm start**.
 ```
