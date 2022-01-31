@@ -1,5 +1,5 @@
 
-# Geography quiz
-## Geography quiz
-###### Geography quiz
+<h1 align="center">
+Geography quiz
+</h1>
 
