@@ -9,7 +9,7 @@ MongoDB, React, Nodejs, JavaScript, CSS
 
 ###### What you need to run this code:
 1. Nodejs
-2. NPM
+2. Npm
 3. MongoDB
 
 ## clone or download
